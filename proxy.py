@@ -20,7 +20,7 @@ def getIp(count):
 
     try:
         res = requests.get(
-            url="http://http.zhiliandaili.cn/Users-whiteIpAddNew.html?appid=3802&appkey=a2792cf6bf201ec00878b40de918cfcb&whiteip=47.105.44.64,47.100.57.249,49.94.143.215",
+            url="http://http.zhiliandaili.cn/Users-whiteIpAddNew.html?appid=3802&appkey=a2792cf6bf201ec00878b40de918cfcb&whiteip=121.0.0.1",
             timeout=5
         )
         response = requests.get(

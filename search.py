@@ -199,33 +199,6 @@ class Order(object):
         获得楼层
         :return:
         """
-        # floor = requests.get(
-        #     url='http://seat.hhit.edu.cn/ClientWeb/pro/ajax/room.aspx',
-        #     timeout=self.timeout,
-        #     params={
-        #         'classkind': '8',
-        #         'date': self.date,
-        #         'start': self.start,
-        #         'end': self.end,
-        #         'act': 'get_rm_sta',
-        #         '_nocache': ''
-        #     },
-        #     headers={
-        #         'Host': 'seat.hhit.edu.cn',
-        #         'Refer': 'http://seat.hhit.edu.cn/ClientWeb/m/ic2/Default.aspx',
-        #         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
-        #         'Connection': 'close'
-        #     },
-        #     cookies=self.all_cookie_dict,
-        #     proxies=self.proxy
-        # )
-        # floor_dic = floor.json()
-        # if floor_dic['msg'] == 'ok':
-        #     for item in floor_dic['data']:
-        #         yield item
-
-
-
         room = ["西104", '西101', '西201', '东202', '西201', "西204", "西301", "西303", "西401", "西403", "西501", "西504"]
         floor_list = []
         for item in room:

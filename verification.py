@@ -97,16 +97,16 @@ class YDMHttp:
 
 def getcode(name):
     # 普通用户名
-    username = 'Aaron5738'
+    username = ''
 
     # 普通用户密码
-    password = '19941113yxd'
+    password = ''
 
     # 软件ＩＤ，开发者分成必要参数。登录开发者后台【我的软件】获得！
-    appid = 8351
+    appid = None
 
     # 软件密钥，开发者分成必要参数。登录开发者后台【我的软件】获得！
-    appkey = 'cb2ee4452192d51d6aad7aff1ccf1bc4'
+    appkey = ''
 
     # 图片文件
     filename = 'code/%s.jpg' % name

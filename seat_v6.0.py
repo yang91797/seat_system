@@ -1,24 +1,24 @@
 from gevent import monkey;
-
-monkey.patch_all()
-import gevent
-import requests
-import datetime
-import time
-import dateutil.parser
+monkey.patch_all();
 from threading import Thread, RLock
-import smtplib
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from sqlheper import SqlHelper
 from proxy import ip
-import os
 from verification import getcode
 from pyquery import PyQuery
-import re
 from chaojiying import getCodeChao
 from utils import calculate
 from OCRcode import Baidu
+import random
+import gevent
+import requests
+import datetime
+import time
+import smtplib
+import dateutil.parser
+import os
+import re
 
 
 st = time.perf_counter()
@@ -155,9 +155,53 @@ lock = RLock()
 
 class Order(object):
     base_url = 'http://seat.hhit.edu.cn/ClientWeb/m/ic2/Default.aspx'
-    agent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1'
+    user_agent_list = [
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 "
+        "(KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
+        "Mozilla/5.0 (X11; CrOS i686 2268.111.0) AppleWebKit/536.11 "
+        "(KHTML, like Gecko) Chrome/20.0.1132.57 Safari/536.11",
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.6 "
+        "(KHTML, like Gecko) Chrome/20.0.1092.0 Safari/536.6",
+        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.6 "
+        "(KHTML, like Gecko) Chrome/20.0.1090.0 Safari/536.6",
+        "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.1 "
+        "(KHTML, like Gecko) Chrome/19.77.34.5 Safari/537.1",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/536.5 "
+        "(KHTML, like Gecko) Chrome/19.0.1084.9 Safari/536.5",
+        "Mozilla/5.0 (Windows NT 6.0) AppleWebKit/536.5 "
+        "(KHTML, like Gecko) Chrome/19.0.1084.36 Safari/536.5",
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
+        "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3",
+        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3",
+        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+        "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3",
+        "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 "
+        "(KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 "
+        "(KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24",
+        "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 "
+        "(KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
+    ]
     date_msg = str(datetime.datetime.now()).split(maxsplit=1)[0]
     path = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'record'), '%smsg.text' % date_msg)
+    headers = {
+        'User-Agent': random.choice(user_agent_list),
+        'Host': 'seat.hhit.edu.cn',
+        'Upgrade-Insecure-Requests': '1',
+        'Connection': 'close',
+        'Referer': 'http://seat.hhit.edu.cn/ClientWeb/m/ic2/Default.aspx'
+    }
 
     def __init__(self):
         self.proxy = None  # {'http': 'http://58.254.220.116:53579', 'https': 'https://58.254.220.116:53579'}
@@ -244,7 +288,7 @@ class Order(object):
                     self.while_times += 1
                 if now.hour >= self.h and now.minute >= self.m or now.hour >= self.h and now.minute >= 29 and now.second >= 45 or now.hour > self.h:
                     # if now.hour == self.h and now.minute == 29 and now.second == 35:
-                        # time.sleep(0.85)
+                    # time.sleep(0.85)
                     if self.open and now_time.hour <= self.h and now_time.minute == 29 and now_time.second < 58:
                         sleep = 58 - now_time.second
                         print("睡眠：", sleep)
@@ -281,12 +325,7 @@ class Order(object):
         index = requests.get(
             url=self.base_url,
             timeout=self.timeout,
-            headers={
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Mobile Safari/537.36',
-                'Host': 'seat.hhit.edu.cn',
-                'Upgrade-Insecure-Requests': '1',
-                'Connection': 'close'
-            },
+            headers=self.headers,
             proxies=self.proxy,
             allow_redirects=False
         )
@@ -297,6 +336,7 @@ class Order(object):
     def logins(self, user):
         # self.code()
         # self.getCode()
+
         login_res = requests.get(
             url='http://seat.hhit.edu.cn/ClientWeb/pro/ajax/login.aspx',
             timeout=self.timeout,
@@ -311,24 +351,16 @@ class Order(object):
                 'wxuserid': '',
                 '_nocache': ''
             },
-            headers={
-                'Host': 'seat.hhit.edu.cn',
-                'Referer': 'http://seat.hhit.edu.cn/ClientWeb/m/ic2/Default.aspx',
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Mobile Safari/537.36',
-                'Connection': 'close',
-                "X-Requested-With": "XMLHttpRequest"
-            },
+            headers=self.headers.pop('Referer', None),
             proxies=self.proxy,
             cookies=self.all_cookie_dict
         )
         self.all_cookie_dict.update(login_res.cookies.get_dict())
         warning = "We're working to restore all services as soon as possible"
-        print(login_res.text, self.username, '????')
         msg = login_res.text
         t = str(datetime.datetime.now())
         info = '%s: %s: %s' % (self.username, msg, t)
-        print(info)
-        print(self.auth, user, self.password)
+
         self.g.append(gevent.spawn(self.msg, info))
         if warning in msg and self.number < 10:
             self.number += 1
@@ -371,7 +403,6 @@ class Order(object):
         return floor_list
 
     def get_room(self, rooms, room_name):
-
         for room in rooms:
 
             response = requests.get(
@@ -393,12 +424,7 @@ class Order(object):
                     'fr_end': self.end,
                     '_nocache': ''
                 },
-                headers={
-                    'Host': 'seat.hhit.edu.cn',
-                    'Referer': 'http://seat.hhit.edu.cn/ClientWeb/m/ic2/Default.aspx',
-                    'User-Agent': 'Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Mobile Safari/537.36',
-                    'Connection': 'close'
-                },
+                headers=self.headers,
                 proxies=self.proxy,
                 cookies=self.all_cookie_dict
             )
@@ -429,6 +455,7 @@ class Order(object):
         if not self.flag2:
             print(self.flag2, "$$")
             return
+
         response = requests.get(
             url='http://seat.hhit.edu.cn/ClientWeb/pro/ajax/reserve.aspx',
             timeout=self.timeout,
@@ -453,13 +480,7 @@ class Order(object):
                 '_nocache': '',
                 'number': self.auth
             },
-            headers={
-                'Host': 'seat.hhit.edu.cn',
-                'Referer': 'http://seat.hhit.edu.cn/ClientWeb/m/ic2/Default.aspx',
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 8.0; Pixel 2 Build/OPD3.170816.012) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Mobile Safari/537.36',
-                'Connection': 'close'
-
-            },
+            headers=self.headers,
             proxies=self.proxy,
             cookies=self.all_cookie_dict
         )
@@ -475,8 +496,7 @@ class Order(object):
             self.g.append(gevent.spawn(self.msg, info))
             sendMsg = "%s同学你好:座位号:%s" % (self.username, seat['title'])
             self.g.append(gevent.spawn(self.send_email, self.email, sendMsg))
-            # self.send_email(self.email, info)
-            # self.g.append(gevent.spawn(self.change, times=True, accomplished=True))
+
             self.change(times=True, accomplished=True)
             print(i, len(self.seat_time), "%")
             if i == len(self.seat_time) - 1:
@@ -526,11 +546,7 @@ class Order(object):
         res = requests.get(
             url='http://seat.hhit.edu.cn/ClientWeb/pro/page/image.aspx?',
             timeout=self.timeout,
-            headers={
-                'Host': 'seat.hhit.edu.cn',
-                'Referer': 'http://seat.hhit.edu.cn/ClientWeb/m/ic2/Default.aspx',
-                'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Mobile Safari/537.36'
-            },
+            headers=self.headers,
             proxies=self.proxy,
             cookies=self.all_cookie_dict
         )
@@ -549,14 +565,11 @@ class Order(object):
             return
 
         else:
+            option = {'Host': 'www.baidu.com'}
             baiduText = requests.get(
                 url="https://www.baidu.com/s?ie=utf8&oe=utf8&tn=98010089_dg&ch=11&wd=%s" % result,
                 timeout=5,
-                headers={
-                    'Host': 'www.baidu.com',
-                    'Upgrade-Insecure-Requests': '1',
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.6799.400 QQBrowser/10.3.2908.400'
-                },
+                headers=dict(self.headers, **option),
                 proxies=self.proxy,
             )
             doc = PyQuery(baiduText.text)
@@ -578,20 +591,17 @@ class Order(object):
                             # self.sql.modify("update recordmsg set code=%s where number=%s", [res_line[0], self.user])
                             return
 
-    def getCodeC(self):         # 超级鹰打码
+    def getCodeC(self):  # 超级鹰打码
         res = getCodeChao(self.user)
         print(res)
         if res.get("err_no") == 0:
             resCode = res.get("pic_str")
-            if '\u4e00' <= resCode <= '\u9fa5' and len(resCode) > 1:        # 判断是否为汉字
+            if '\u4e00' <= resCode <= '\u9fa5' and len(resCode) > 1:  # 判断是否为汉字
+                option = {'Host': 'www.baidu.com'}
                 baiduText = requests.get(
                     url="https://www.baidu.com/s?ie=utf8&oe=utf8&tn=98010089_dg&ch=11&wd=%s" % resCode,
                     timeout=5,
-                    headers={
-                        'Host': 'www.baidu.com',
-                        'Upgrade-Insecure-Requests': '1',
-                        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.26 Safari/537.36 Core/1.63.6799.400 QQBrowser/10.3.2908.400'
-                    },
+                    headers=dict(self.headers, **option),
                     proxies=self.proxy,
                 )
                 doc = PyQuery(baiduText.text)
@@ -642,8 +652,8 @@ class Order(object):
         self.f.write(message + '\n')
 
     def send_email(self, my_user, content, ):
-        my_sender = 'Aaron5718@163.com'  # 发件人邮箱账号
-        # my_user = '573812718@qq.com'  # 收件人邮箱账号
+        my_sender = ''  # 发件人邮箱账号
+        # my_user = ''  # 收件人邮箱账号
 
         # 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码
         msg = MIMEText(content, 'plain', 'utf-8')
@@ -654,7 +664,7 @@ class Order(object):
         msg['Subject'] = '选座'  # 邮件的主题，也可以说是标题
 
         server = smtplib.SMTP_SSL('smtp.163.com', 465)  # 发送邮件服务器和端口号（qq服务器好像是smtp.163.com）
-        server.login(my_sender, "19941113yxd")
+        server.login(my_sender, "password")
 
         # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
         server.sendmail(my_sender, my_user, msg.as_string())
@@ -886,5 +896,3 @@ if __name__ == '__main__':
 
     for t in thread_list:
         t.join()
-
-

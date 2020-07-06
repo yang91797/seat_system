@@ -27,8 +27,8 @@ def inquire():
 
 def change(item, msg):
     sql.modify('update userinfo set whether=0 where number=%s', [item.get("number"), ])
-    my_sender = 'Aaron5718@163.com'  # 发件人邮箱账号
-    # my_user = '573812718@qq.com'  # 收件人邮箱账号
+    my_sender = ''  # 发件人邮箱账号
+    # my_user = ''  # 收件人邮箱账号
 
     # 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码
     msg = MIMEText(msg, 'plain', 'utf-8')
@@ -39,7 +39,7 @@ def change(item, msg):
     msg['Subject'] = '约座通知'  # 邮件的主题，也可以说是标题
 
     server = smtplib.SMTP_SSL('smtp.163.com', 465)  # 发送邮件服务器和端口号（qq服务器好像是smtp.163.com）
-    server.login(my_sender, "19941113yxd")
+    server.login(my_sender, "")
 
     # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
     server.sendmail(my_sender, item.get("email"), msg.as_string())

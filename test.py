@@ -28,8 +28,6 @@ def str_to_hex(s):
 li = [i*i for i in range(1, 11)]
 print(li)
 
-import os
-os.rm
 
 
 

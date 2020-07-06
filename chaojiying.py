@@ -52,7 +52,7 @@ class Chaojiying_Client(object):
 
 
 def getCodeChao(userNumbaer):
-    chaojiying = Chaojiying_Client('Aaron5738', 'jtcqXKKDf5K5MDC', '900871')  # 用户中心>>软件ID 生成一个替换 96001
+    chaojiying = Chaojiying_Client('', '', '71')  # 用户中心>>软件ID 生成一个替换 96001
 
     path = "code/%s.jpg" % userNumbaer
     im = open(path, 'rb').read()  # 本地图片文件路径 来替换 a.jpg 有时WIN系统须要//

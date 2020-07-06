@@ -1,5 +1,4 @@
 
-
 def calculate(strs):
     if '\u4e00' <= strs <= '\u9fa5':
         return strs
