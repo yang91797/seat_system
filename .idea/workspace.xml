@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0efeb77f-3a19-4567-b2a6-98d6e8d0d2e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chaojiying.py" beforeDir="false" afterPath="$PROJECT_DIR$/chaojiying.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inform.py" beforeDir="false" afterPath="$PROJECT_DIR$/inform.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/proxy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat1.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat3.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v4.2.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v4.4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v4.5.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v4.6.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v4.7.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v4.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v5.0.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/seat_v6.0.py" beforeDir="false" afterPath="$PROJECT_DIR$/seat_v6.0.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/verification.py" beforeDir="false" afterPath="$PROJECT_DIR$/verification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +102,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="js" value="35" />
-          <entry key="md" value="433" />
+          <entry key="md" value="435" />
           <entry key="py" value="15722" />
           <entry key="sql" value="86" />
           <entry key="txt" value="274" />
@@ -133,7 +111,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JavaScript" value="35" />
-          <entry key="Markdown" value="433" />
+          <entry key="Markdown" value="435" />
           <entry key="PLAIN_TEXT" value="274" />
           <entry key="Python" value="15697" />
           <entry key="SQL" value="111" />
@@ -143,7 +121,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/seat_v6.0.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-358">
@@ -160,12 +138,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="475">
-                <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+              <first_editor relative-caret-position="342">
+                <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
               </first_editor>
               <second_editor />
             </state>
@@ -783,16 +761,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="475">
-            <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/seat_v6.0.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-358">
@@ -805,6 +773,16 @@
             <element signature="e#4530#6805#0" />
             <element signature="e#7280#8537#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="342">
+            <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
